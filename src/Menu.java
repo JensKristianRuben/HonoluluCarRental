@@ -350,8 +350,35 @@ public class Menu {
         return input;
     }
 
-    public void printmostPopCars(ArrayList<Contract> contracts) {
+//   public void printmostPopCars(ArrayList<Contract> contracts) {
+//        int con_count = 0;
+//       for (Contract contract : contracts) {
+//           (contract.car.getCarID() >= contract);
+//           con_count++
+//
+//
+//        }
+//  }
+
+
+    public void printmostPopCars(ArrayList<Contract> contracts){
+        Map<Integer, Integer> carCounts = new HashMap<>();
+
         for (Contract contract : contracts) {
+            int carID = contract. car.getCarID();
+            carCounts.put(carID, carCounts.getOrDefault(carID, 0) + 1);
+        }
+
+        int maxCount = 0;
+        for (int count : carCounts.values()) {
+            maxCount = Math.max(maxCount, count);
+        }
+
+        System.out.println("Most popular cars:");
+        for (Map.Entry<Integer, Integer> entry : carCounts.entrySet()) {
+            if (entry.getValue() == maxCount) {
+                System.out.println("Car ID: " + entry.getKey() + ", Count: " + entry.getValue());
+            }
         }
     }
 }
