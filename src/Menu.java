@@ -16,8 +16,6 @@ public class Menu {
     final private String pathToCostumersTxt = "src/dataFiles/costumers.txt";
 
     public Menu() {
-        System.out.println();
-        System.out.println("Helloworld!");
         this.scan = new Scanner(System.in);
         this.cars = new ArrayList<>();
         this.costumers = new ArrayList<>();
