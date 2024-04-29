@@ -350,17 +350,6 @@ public class Menu {
         return input;
     }
 
-//   public void printmostPopCars(ArrayList<Contract> contracts) {
-//        int con_count = 0;
-//       for (Contract contract : contracts) {
-//           (contract.car.getCarID() >= contract);
-//           con_count++
-//
-//
-//        }
-//  }
-
-
     public void printmostPopCars(ArrayList<Contract> contracts){
         Map<Integer, Integer> carCounts = new HashMap<>();
 
