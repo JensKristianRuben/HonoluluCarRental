@@ -1,0 +1,11 @@
+1,John Doe,123 Main St,12345,Anytown,55456789,34564321,john@example.com,ABC123,2020-01-01
+2,Alice Smith,456 Elm St,54321,Othertown,23453621,33445566,alice@example.com,DEF456,2018-05-15
+3,Bob Johnson,789 Oak St,67890,Somewhere,43256789,34245643,bob@example.com,GHI789,2019-09-30
+4,XYZ Corp,321 Pine St,98765,Nowhere,34564789,43255566,xyz@example.com,123456,Big Boss
+5,Acme Inc,567 Cedar St,13579,Everywhere,34547867,34245654,acme@example.com,654321,CEO
+6,Peter Jensen,321 Oak St,54321,Anytown,55967584,12324212,peter@example.com,ABC Inc,123 Main St,22334455,123456789
+7,Maria Nielsen,456 Elm St,98765,Othertown,56753423,99874356,maria@example.com,DEF Corp,789 Cedar St,21987463,987654321
+8,Lars Pedersen,789 Maple St,67890,Somewhere,99994565,32421235,lars@example.com,GHI Ltd,321 Pine St,44352312,456789123
+9,Susanne Hansen,987 Pine St,24680,Nowhere,75123122,98764312,susanne@example.com,JKL Co,987 Oak St,34553322,789123456
+10,Morten Andersen,567 Cedar St,13579,Everywhere,22221222,99764312,morten@example.com,MNO GmbH,567 Elm St,99875463,987654321
+11,Jens Kristian Ruben,Jes Jessensgade 14,4800,Nykøbing Falster,29339565,29339565,Jegersej@gmail.com,692165,2019-02-05

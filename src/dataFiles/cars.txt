@@ -1,0 +1,11 @@
+1,Mercedes-Benz,S-Class,Petrol,ABC123,2021-01,5000,3500,true,true,true,true,400,5
+2,Toyota,Sienna,Petrol,DEF456,2020-01,8000,2500,false,true,true,false,200,7
+3,Porsche,911,Petrol,GHI789,2019-01,6000,3000,false,true,false,true,450,2
+4,BMW,7-Series,Petrol,JKL012,2021-02,4000,4000,true,true,true,true,450,5
+5,Honda,Odyssey,Petrol,MNO345,2020-02,7000,3000,true,true,true,false,200,8
+6,Audi,A6,Petrol,PQR678,2019-02,5500,3000,true,true,true,true,350,5
+7,Volvo,XC90,Petrol,STU901,2020-03,6500,3000,true,true,true,true,300,7
+8,Subaru,Outback,Petrol,VWX234,2021-03,4500,2500,true,true,true,false,300,6
+9,Lexus,RX,Petrol,YZ0123,2020-03,6000,3500,true,true,true,true,300,5
+10,Jeep,Grand Cherokee,Petrol,456ABC,2019-04,5000,3500,true,true,true,false,400,5
+11,Citroën,Berlingo,diesel,GIO691,2019-06,5000,3500,false,true,false,false,100,7
