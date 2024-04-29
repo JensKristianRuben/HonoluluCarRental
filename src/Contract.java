@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
-public class Contract implements Comparator<Contract> {
+public class Contract implements Comparable<Contract> {
     Costumer costumer;
     Car car;
     private LocalDate fromDate;
@@ -68,12 +68,8 @@ public class Contract implements Comparator<Contract> {
     public String getStringToSave(){
         return car.getCarID() + "," + costumer.getCostumerID() + "," + fromDate + "," + toDate + "," + maxKm + "," + startingKm;
     }
-    public static Comparator <Contract> dateComparator(){
-        return Comparator.comparing(contract -> contract.fromDate);
-    }
 
-    @Override
-    public int compare(Contract o1, Contract o2) {
-        return o1.getFromTimeAndDate().compareTo(o2.getFromTimeAndDate());
+    public int compareTo(Contract other){
+       return this.fromDate.compareTo(other.fromDate);
     }
 }

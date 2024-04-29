@@ -58,6 +58,7 @@ public class Menu {
                     printCostumersArrayList(costumers);
                     break;
                 case 6:
+                    Collections.sort(contracts);
                     printContractsArrayList(contracts);
                     break;
                 case 7:
@@ -67,45 +68,30 @@ public class Menu {
                     saveContractsToFile(contracts);
                     return;
                 default:
-                    System.out.println("Ugyldigt input, prøv med et heltal");
+                    System.out.println("Ugyldigt input. Prøv med et heltal mellem 1-7.");
             }
         }
     }
 
     public void createNewCar(Scanner scan, ArrayList<Car> cars) {
-        System.out.println("Hvilket model er bilen: ");
-        String model = scan.nextLine();
-        System.out.println("Hvilket brand er bilen: ");
-        String brand = scan.nextLine();
-        System.out.println("Hvilket fuel type er bilen: ");
-        String fuelType = scan.nextLine();
-        System.out.println("Hvad er bilens regNumber: ");
-        String regNumber = scan.nextLine();
-        System.out.println("Hvad er regYearMonth: ");
-        String regYearAndMonth = scan.nextLine();
-        System.out.println("Hvor mange km kørt: ");
-        int kmDriven = scan.nextInt();
-        System.out.println("Hvar er bilens ccm:");
-        int ccm = scan.nextInt();
-        System.out.println("Er bilen automatisk gear (true/false): ");
-        boolean automaticGear = scan.nextBoolean();
-        System.out.println("Har bilen aircon: (true/false) ");
-        boolean aircon = scan.nextBoolean();
-        System.out.println("har bilen cruise control: (true/false) ");
-        boolean cruiseControl = scan.nextBoolean();
-        System.out.println("Er der læder sæder: (true/false) ");
-        boolean leatherSeats = scan.nextBoolean();
-        System.out.println("hvor mange hp har bilen: ");
-        int hp = scan.nextInt();
-        System.out.println("hvor mange sætter har bilen: ");
-        int amountOfSeats = scan.nextInt();
+        String model = getStringInput(scan, "Hvilket model er bilen: ");
+        String brand = getStringInput(scan, " Hvilket brand er bilen: ");
+        String fuelType = getStringInput(scan, "Hvilket fuel type er bilen: ");
+        String regNumber = getStringInput(scan, "Hvad er bilens regNumber: ");
+        String regYearAndMonth = getStringInput(scan, "Hvad er regYearMonth: ");
+        int kmDriven = getIntInput(scan, "Hvor mange km kørt: ");
+        int ccm = getIntInput(scan, "Hvar er bilens ccm:");
+        boolean automaticGear = getBooleanInput(scan, "Er bilen automatisk gear (ja/nej) ");
+        boolean aircon = getBooleanInput(scan, "Har bilen aircon: (ja/nej)");
+        boolean cruiseControl = getBooleanInput(scan, "har bilen cruise control: (ja/nej)");
+        boolean leatherSeats = getBooleanInput(scan, "Er der læder sæder: (ja/nej)");
+        int hp = getIntInput(scan, "hvor mange hp har bilen: ");
+        int amountOfSeats = getIntInput(scan, "hvor mange sætter har bilen: ");
         scan.nextLine();
         int carID = Car.carIDCounter + 1;
 
         Car newCar = new Car(brand, model, fuelType, regNumber, regYearAndMonth, kmDriven, ccm, automaticGear, aircon, cruiseControl, leatherSeats, hp, amountOfSeats, carID);
         cars.add(newCar);
-
-
     }
 
     public void createNewCostumer() {
@@ -117,50 +103,30 @@ public class Menu {
         int costumerType = scan.nextInt();
         scan.nextLine();
         if (costumerType == 1) {
-            System.out.println("Hvad er kundens navn: ");
-            String name = scan.nextLine();
-            System.out.println("Hvad er kunden addresse: ");
-            String address = scan.nextLine();
-            System.out.println("Hvad er postnummeret på kunden: ");
-            String postNumber = scan.nextLine();
-            System.out.println("Hvilken by bor kunden i: ");
-            String city = scan.nextLine();
-            System.out.println("Hvad er kundens telefonnummer: ");
-            String phoneNumber = scan.nextLine();
-            System.out.println("Hvad er kundens mobil telefonnummer: ");
-            String mobilePhoneNumber = scan.nextLine();
-            System.out.println("Hvad er kunden email: ");
-            String email = scan.nextLine();
-            System.out.println("Hvad er førens kørekort ID: ");
-            String licenseId = scan.nextLine();
-            System.out.println("Hvor længe har føren haft kørekort: format (dd-mm-år)");
-            String licenseSincetime = scan.nextLine();
+            String name = getStringInput(scan, "Hvad er kundens navn: ");
+            String address = getStringInput(scan, "Hvad er kunden addresse: ");
+            String postNumber = getStringInput(scan, "Hvad er postnummeret på kunden: ");
+            String city = getStringInput(scan, "Hvilken by bor kunden i: ");
+            String phoneNumber = getStringInput(scan, "Hvad er kundens telefonnummer: ");
+            String mobilePhoneNumber = getStringInput(scan, "Hvad er kundens mobil telefonnummer: ");
+            String email = getStringInput(scan, "Hvad er kunden email: ");
+            String licenseId = getStringInput(scan, "Hvad er førens kørekort ID: ");
+            String licenseSincetime = getStringInput(scan, "Hvor længe har føren haft kørekort: format (år-mm-dd)");
 
             costumers.add(new Private(name, address, postNumber, city, phoneNumber, mobilePhoneNumber, email, licenseId, licenseSincetime));
 
         } else if (costumerType == 2) {
-            System.out.println("Hvad er kundens navn: ");
-            String name = scan.nextLine();
-            System.out.println("Hvad er kunden addresse: ");
-            String address = scan.nextLine();
-            System.out.println("Hvad er postnummeret på kunden: ");
-            String postNumber = scan.nextLine();
-            System.out.println("Hvilken by bor kunden i: ");
-            String city = scan.nextLine();
-            System.out.println("Hvad er kundens telefonnummer: ");
-            String phoneNumber = scan.nextLine();
-            System.out.println("Hvad er kundens mobil telefonnummer: ");
-            String mobilePhoneNumber = scan.nextLine();
-            System.out.println("Hvad er kunden email: ");
-            String email = scan.nextLine();
-            System.out.println("Hvad er erhvervets navn: ");
-            String companyName = scan.nextLine();
-            System.out.println("Hvad er erhvervets addresse: ");
-            String companyAddress = scan.nextLine();
-            System.out.println("Hvad er erhvervets telefon nummer: ");
-            String companyPhoneNumber = scan.nextLine();
-            System.out.println("hver er erhvervets CRN: ");
-            String crn = scan.nextLine();
+            String name = getStringInput(scan, "Hvad er kundens navn: ");
+            String address = getStringInput(scan, "Hvad er kunden addresse: ");
+            String postNumber = getStringInput(scan, "Hvad er postnummeret på kunden: ");
+            String city = getStringInput(scan, "Hvilken by bor kunden i: ");
+            String phoneNumber = getStringInput(scan, "Hvad er kundens telefonnummer: ");
+            String mobilePhoneNumber = getStringInput(scan, "Hvad er kundens mobil telefonnummer: ");
+            String email = getStringInput(scan, "Hvad er kunden email: ");
+            String companyName = getStringInput(scan, "Hvad er erhvervets navn: ");
+            String companyAddress = getStringInput(scan, "Hvad er erhvervets addresse: ");
+            String companyPhoneNumber = getStringInput(scan, "Hvad er erhvervets telefon nummer: ");
+            String crn = getStringInput(scan, "hver er erhvervets CRN: ");
 
             costumers.add(new Company(name, address, postNumber, city, phoneNumber, mobilePhoneNumber, email, companyName, companyAddress, companyPhoneNumber, crn));
         }
@@ -168,8 +134,7 @@ public class Menu {
 
     public void createNewRentalContract(Scanner scan, ArrayList<Contract> contracts) {
         printCostumersArrayList(costumers);
-        System.out.println("Hvem er kunden: (brug mobilnummer)");
-        String mobileNumber = scan.nextLine();
+        String mobileNumber = getStringInput(scan, "Hvem er kunden: (brug mobilnummer)");
         Costumer costumerFound = null;
         for (Costumer costumer : costumers) {
             if (costumer.getMobilePhoneNumber().equals(mobileNumber)) {
@@ -182,8 +147,7 @@ public class Menu {
             return;
         }
         printCarsArraylist(cars);
-        System.out.println("Hvilken bil vil kunden gerne leje: (brug ID) ");
-        int carID = scan.nextInt();
+        int carID = getIntInput(scan, "Hvilken bil vil kunden gerne leje: (brug ID) ");
         Car carFound = null;
         for (Car car : cars) {
             if (car.getCarID() == carID) {
@@ -196,15 +160,10 @@ public class Menu {
             return;
         }
         scan.nextLine();
-        System.out.println("Hvornår vil kunden gerne leje bilen fra: ");
-        String fromTimeAndDate = scan.nextLine();
-        System.out.println("Hvornår vil kunden gerne leje bilen til: ");
-        String toTimeAndDate = scan.nextLine();
-
-        System.out.println("Hvor mange kilometer vil kunden gerne køre: ");
-        int maxKM = scan.nextInt();
-        System.out.println("Hvor meget har bilen kørt på nuværende tidspunkt: ");
-        int startingKM = scan.nextInt();
+        String fromTimeAndDate = getStringInput(scan, "Hvornår vil kunden gerne leje bilen fra: ");
+        String toTimeAndDate = getStringInput(scan, "Hvornår vil kunden gerne leje bilen til: ");
+        int maxKM = getIntInput(scan, "Hvor mange kilometer vil kunden gerne køre: ");
+        int startingKM = getIntInput(scan, "Hvor meget har bilen kørt på nuværende tidspunkt: ");
 
         contracts.add(new Contract(costumerFound, carFound, fromTimeAndDate, toTimeAndDate, maxKM, startingKM));
     }
@@ -346,6 +305,53 @@ public class Menu {
         System.out.println("<<<KONTRAKT KARTOTEK>>>");
         for (Contract contract : contracts) {
             System.out.println(contract);
+        }
+    }
+
+    public static String getStringInput(Scanner scan, String prompt) {
+        System.out.println(prompt);
+        return scan.nextLine();
+    }
+
+    public static int getIntInput(Scanner scan, String prompt) {
+        int input = 0;
+        boolean isValid = false;
+
+        do {
+            System.out.println(prompt);
+            try {
+                input = Integer.parseInt(scan.nextLine());
+                isValid = true;
+            } catch (NumberFormatException e) {
+                System.out.println("indtast venligst et heltal.");
+                System.out.println();
+            }
+        } while (!isValid);
+        return input;
+    }
+
+    public static boolean getBooleanInput(Scanner scan, String prompt) {
+        boolean input = false;
+        boolean isValid = false;
+        do {
+            System.out.println(prompt);
+            String userInput = scan.nextLine().toLowerCase();
+            if (userInput.equals("ja")) {
+                input = true;
+                isValid = true;
+            } else if (userInput.equals("nej")) {
+                input = false;
+                isValid = true;
+            } else {
+                System.out.println("Forkert indtastning. prøv med ja/nej");
+                System.out.println();
+            }
+        } while (!isValid);
+        return input;
+    }
+
+    public void printmostPopCars(ArrayList<Contract> contracts) {
+        for (Contract contract : contracts) {
         }
     }
 }
