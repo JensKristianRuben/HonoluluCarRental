@@ -11,9 +11,11 @@ public class Contract implements Comparable<Contract> {
     private int startingKm;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private int contractID;
+    static int contractIDCounter;
 
 
-    public Contract(Costumer costumer, Car car, String fromTimeAndDate, String toTimeAndDate, int maxKm, int startingKm) {
+    public Contract(Costumer costumer, Car car, String fromTimeAndDate, String toTimeAndDate, int maxKm, int startingKm, int contractID) {
         this.costumer = costumer;
         this.car = car;
         this.fromDate = LocalDate.parse(fromTimeAndDate, formatter);
@@ -59,17 +61,35 @@ public class Contract implements Comparable<Contract> {
         return costumer;
     }
 
+    public int getContractID() {
+        return contractID;
+    }
+
+    public void setContractID(int contractID) {
+        this.contractID = contractID;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public void setCostumer(Costumer costumer) {
         this.costumer = costumer;
     }
-    public String toString(){
-        return costumer.getName() + " / " + costumer.getMobilePhoneNumber() + "\nBrand: " + car.getBrand() + "\nModel: " + car.getModel() + "\nI perioden: " + fromDate + " / " + toDate + "\nBilen starter på: " + startingKm + " KM" + "\nOg kunden kan kører: " + maxKm + "\n--------------------------------";
-    }
-    public String getStringToSave(){
-        return car.getCarID() + "," + costumer.getCostumerID() + "," + fromDate + "," + toDate + "," + maxKm + "," + startingKm;
+
+    public String toString() {
+        return costumer.getName() + " / " + costumer.getMobilePhoneNumber() + "\nBrand: " + car.getBrand() + "\nModel: " + car.getModel() + "\nI perioden: " + fromDate + " / " + toDate + "\nBilen starter på: " + startingKm + " KM" + "\nOg kunden kan kører: " + maxKm + "\n" + contractID + "\n--------------------------------";
     }
 
-    public int compareTo(Contract other){
-       return this.fromDate.compareTo(other.fromDate);
+    public String getStringToSave() {
+        return car.getCarID() + "," + costumer.getCostumerID() + "," + fromDate + "," + toDate + "," + maxKm + "," + startingKm + "," + contractID;
+    }
+
+    public int compareTo(Contract other) {
+        return this.fromDate.compareTo(other.fromDate);
     }
 }

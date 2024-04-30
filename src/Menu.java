@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.sql.SQLOutput;
 import java.util.*;
 
 import static java.util.Comparator.*;
@@ -36,7 +35,10 @@ public class Menu {
                     | 4. Vis bil kartotek             |
                     | 5. Vis kunde kartotek           |
                     | 6. Vis kontrakt kartotek        |
-                    | 7. Gemme og afslutte programmet |
+                    | 7. vis de mest populære biler   |
+                    | 8. lave ændringer               |
+                    |    (bil, customer, id)          |
+                    | 9. Gemme og afslutte programmet |
                     *---------------------------------*
                     """);
             int choice = scan.nextInt();
@@ -62,6 +64,32 @@ public class Menu {
                     printContractsArrayList(contracts);
                     break;
                 case 7:
+                    printmostPopCars(contracts);
+                    break;
+                case 8:
+                    System.out.println("""
+                            1: Ændre bil
+                            2: Ændre kunde
+                            3: Ændre kontrakt
+                            """);
+                    int choice1 = scan.nextInt();
+                    scan.nextLine();
+                    switch (choice1) {
+                        case 1:
+                            changeCar(cars, scan);
+                            break;
+                        case 2:
+                            changeCostumer(costumers, scan);
+                            break;
+                        case 3:
+                            changeContracts(contracts, cars, costumers, scan);
+                            break;
+                        default:
+                            System.out.println("Forkert indput, prøv med et heltal mellem 1-3");
+
+                    }
+                    break;
+                case 9:
                     System.out.println("Afslutter programmet!");
                     saveCarsToFile(cars);
                     saveCostumersToFile(costumers);
@@ -164,8 +192,9 @@ public class Menu {
         String toTimeAndDate = getStringInput(scan, "Hvornår vil kunden gerne leje bilen til: ");
         int maxKM = getIntInput(scan, "Hvor mange kilometer vil kunden gerne køre: ");
         int startingKM = getIntInput(scan, "Hvor meget har bilen kørt på nuværende tidspunkt: ");
+        int contractID = Contract.contractIDCounter + 1;
 
-        contracts.add(new Contract(costumerFound, carFound, fromTimeAndDate, toTimeAndDate, maxKM, startingKM));
+        contracts.add(new Contract(costumerFound, carFound, fromTimeAndDate, toTimeAndDate, maxKM, startingKM, contractID));
     }
 
     public void saveCarsToFile(ArrayList<Car> cars) throws FileNotFoundException {
@@ -266,6 +295,8 @@ public class Menu {
             String toTimeAndDate = parts[3];
             int maxKM = Integer.parseInt(parts[4]);
             int startingKm = Integer.parseInt(parts[5]);
+            int contractId = Integer.parseInt(parts[6]);
+
 
             Car selectedCar = null;
             Costumer selectedCostumer = null;
@@ -350,11 +381,11 @@ public class Menu {
         return input;
     }
 
-    public void printmostPopCars(ArrayList<Contract> contracts){
+    public void printmostPopCars(ArrayList<Contract> contracts) {
         Map<Integer, Integer> carCounts = new HashMap<>();
 
         for (Contract contract : contracts) {
-            int carID = contract. car.getCarID();
+            int carID = contract.car.getCarID();
             carCounts.put(carID, carCounts.getOrDefault(carID, 0) + 1);
         }
 
@@ -363,10 +394,111 @@ public class Menu {
             maxCount = Math.max(maxCount, count);
         }
 
-        System.out.println("Most popular cars:");
+        System.out.println("Mest populære biler:");
         for (Map.Entry<Integer, Integer> entry : carCounts.entrySet()) {
             if (entry.getValue() == maxCount) {
                 System.out.println("Car ID: " + entry.getKey() + ", Count: " + entry.getValue());
+            }
+        }
+    }
+
+    public void changeCar(ArrayList<Car> cars, Scanner scan) {
+        printCarsArraylist(cars);
+        int id = getIntInput(scan, "Hvilket bil ville du ændre (id): ");
+
+
+        for (Car car : cars) {
+            if (id == car.getCarID()) {
+
+                car.setModel(getStringInput(scan, "Hvilket model er bilen: "));
+                car.setBrand(getStringInput(scan, " Hvilket brand er bilen: "));
+                car.setFuelType(getStringInput(scan, "Hvilket fuel type er bilen: "));
+                car.setRegNumber(getStringInput(scan, "Hvad er bilens regNumber: "));
+                car.setRegNumber(getStringInput(scan, "Hvad er regYearMonth: "));
+                car.setKmDriven(getIntInput(scan, "Hvor mange km kørt: "));
+                car.setCcm(getIntInput(scan, "Hvar er bilens ccm:"));
+                car.setAutomaticGear(getBooleanInput(scan, "Er bilen automatisk gear (ja/nej) "));
+                car.setAircon(getBooleanInput(scan, "Har bilen aircon: (ja/nej)"));
+                car.setCruiseControl(getBooleanInput(scan, "har bilen cruise control: (ja/nej)"));
+                car.setLeatherSeats(getBooleanInput(scan, "Er der læder sæder: (ja/nej)"));
+                car.setHp(getIntInput(scan, "hvor mange hp har bilen: "));
+                car.setAmountOfSeats(getIntInput(scan, "hvor mange sætter har bilen: "));
+                scan.nextLine();
+
+
+            } else
+                System.out.println("Forkert indtastning. evt. prøv igen");
+        }
+    }
+
+    public void changeCostumer(ArrayList<Costumer> costumers, Scanner scan) {
+        printCostumersArrayList(costumers);
+        System.out.println("Hvilken kunde vil du gerne ændre? (brug kunde id)");
+        int tempID = scan.nextInt();
+
+        for (Costumer costumer : costumers) {
+            if (costumer instanceof Private && tempID == costumer.getCostumerID()) {
+                costumer.setName(getStringInput(scan, "Hvad vil du gerne ændre navnet til: "));
+                costumer.setAddress(getStringInput(scan, "Hvad vil du gerne ændre addressen til: "));
+                costumer.setPostNumber(getStringInput(scan, "Hvad vil du gerne ændre postnummeret til: "));
+                costumer.setCity(getStringInput(scan, "Hvad vil du gerne ændre byen til: "));
+                costumer.setPhoneNumber(getStringInput(scan, "Hvad vil du gerne ændre telefonnummeret til: "));
+                costumer.setMobilePhoneNumber(getStringInput(scan, "Hvad vil du gerne ændre mobilnummeret til: "));
+                costumer.setEmail(getStringInput(scan, "Hvad vil du gerne ændre emailen til: "));
+                ((Private) costumer).setDriverLicenseNumber(getStringInput(scan, "Hvad vil du gerne ændre kørekort nummeret til: "));
+                ((Private) costumer).setDriverSinceDate(getStringInput(scan, "Hvad vil du gerne ændre kørekort holderens kørekort dato til: "));
+            }
+
+            if (costumer instanceof Company && tempID == costumer.getCostumerID()) {
+                costumer.setName(getStringInput(scan, "Hvad vil du gerne ændre navnet til: "));
+                costumer.setAddress(getStringInput(scan, "Hvad vil du gerne ændre addressen til: "));
+                costumer.setPostNumber(getStringInput(scan, "Hvad vil du gerne ændre postnummeret til: "));
+                costumer.setCity(getStringInput(scan, "Hvad vil du gerne ændre byen til: "));
+                costumer.setPhoneNumber(getStringInput(scan, "Hvad vil du gerne ændre telefonnummeret til: "));
+                costumer.setMobilePhoneNumber(getStringInput(scan, "Hvad vil du gerne ændre mobilnummeret til: "));
+                costumer.setEmail(getStringInput(scan, "Hvad vil du gerne ændre emailen til: "));
+                ((Company) costumer).setCompanyName(getStringInput(scan, "Hvad skal erhvers navnet ændres til: "));
+                ((Company) costumer).setCompanyAddress(getStringInput(scan, "Hvad skal erhvervs addressen ændres til: "));
+                ((Company) costumer).setCompanyPhoneNumber(getStringInput(scan, "Hvad skal erhvervs telefonnummeret sættes til: "));
+                ((Company) costumer).setCrn(getStringInput(scan, "Hvad skal erhvervets crn sættes til: "));
+            } else {
+                System.out.println("Forkert indtastning. evt. prøv igen");
+            }
+        }
+    }
+
+    public void changeContracts(ArrayList<Contract> contracts, ArrayList<Car> cars, ArrayList<Costumer> costumers, Scanner scan) {
+        System.out.println("Hvilken kontrakt vil du gerne ændre? (brug ID)");
+        int tempID = scan.nextInt();
+        scan.nextLine();
+
+        for (Contract contract : contracts) {
+            if (tempID == contract.getContractID()) {
+
+                contract.setFromTimeAndDate(getStringInput(scan, "Hvad vil du gerne ændre startdatoen til: (år-mm-dd) "));
+                contract.setToTimeAndDate(getStringInput(scan, "Hvad vil du gerne ændre slutdatoen til: (år-mm-dd)"));
+                contract.setStartingKm(getIntInput(scan, "Hvad skal start kilometer på bilen ændres til: "));
+                contract.setMaxKm(getIntInput(scan, "Hvad skal kundens ønskede km antal ændres til: "));
+                int carID = getIntInput(scan, "Hvad skal bilen ændres til: (brug ID)");
+                int costumerID = getIntInput(scan, "Hvad skal kunden ændres til: (brug ID)");
+
+                Car selectedCar = null;
+                Costumer selectedCostumer = null;
+
+                for (Car car : cars) {
+                    if (carID == car.getCarID()) {
+                        selectedCar = car;
+                        break;
+                    }
+                }
+                for (Costumer costumer : costumers) {
+                    if (costumerID == costumer.getCostumerID()) {
+                        selectedCostumer = costumer;
+                        break;
+                    }
+                }
+                contract.setCar(selectedCar);
+                contract.setCostumer(selectedCostumer);
             }
         }
     }
