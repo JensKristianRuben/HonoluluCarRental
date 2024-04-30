@@ -22,6 +22,8 @@ public class Contract implements Comparable<Contract> {
         this.toDate = LocalDate.parse(toTimeAndDate, formatter);
         this.maxKm = maxKm;
         this.startingKm = startingKm;
+        contractIDCounter++;
+        this.contractID = contractIDCounter;
     }
 
 

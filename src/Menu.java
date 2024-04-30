@@ -313,7 +313,7 @@ public class Menu {
                     break;
                 }
             }
-            contracts.add(new Contract(selectedCostumer, selectedCar, fromTimeAndDate, toTimeAndDate, maxKM, startingKm));
+            contracts.add(new Contract(selectedCostumer, selectedCar, fromTimeAndDate, toTimeAndDate, maxKM, startingKm, contractId));
         }
     }
 
